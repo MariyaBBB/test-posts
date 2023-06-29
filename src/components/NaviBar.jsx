@@ -1,17 +1,17 @@
 import React from "react";
 import { Navbar, Nav, Image } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function NaviBar() {
-
     return(
     <>
         <Navbar collapseOnSelect expand="expand" bg="dark" data-bs-theme="dark" className="mb-3">
-            <Navbar.Brand className="ms-2"> Blog Post</Navbar.Brand>
+            <Navbar.Brand className="ms-2" as={Link} to="/"> Blog Post</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav" >
                 <Nav className="ms-5">
-                    <Nav.Link>Список постов</Nav.Link>
-                    <Nav.Link>Обо мне</Nav.Link>
+                    <Nav.Link as={Link} to="/">Список постов</Nav.Link>
+                    <Nav.Link as={Link} to="/about">Обо мне</Nav.Link>
                 </Nav>    
             </Navbar.Collapse>
             <Navbar.Collapse className="mt-3">
