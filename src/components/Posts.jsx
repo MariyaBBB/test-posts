@@ -1,39 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { getPosts } from "./helpers/API";
 import axios from "axios";
-import { Card, Image } from "react-bootstrap";
-import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import Post from "./Post";
+import { Form, Button, Stack, InputGroup } from "react-bootstrap";
 
 const src = 'https://jsonplaceholder.typicode.com/posts/';
 
 export default function Posts() {
     const [posts, setPosts] = useState([]);
+    const [filteredPosts, setFilteredPosts] = useState([]);    
 
+    const getText = (e) => {
+        console.log(e);
+        setFilteredPosts(posts.filter(p => p.title.includes(e)))
+        console.log(filteredPosts);
+    }
     useEffect(() => {
         axios
             .get(src)
             .then(data => setPosts(data.data))
     }, [])
     return(
-        <>
+        <>  
+            <Stack direction="horizontal" gap={3}>
+                <InputGroup className="m-2 w-auto">
+                    <Form.Control onInput={(e) => getText(e.target.value)} aria-describedby="basic-addon1"  placeholder="Type to search..." /> 
+                    <Button variant="light"> X </Button>  
+                    <Button variant="info">Search</Button>                
+                </InputGroup>
+            </Stack>
           { posts.map(post => (
-            <Card key={post.id}>
-                <Card.Body className="">
-                    <Card.Title>
-                        <Link
-                        to="/about">
-                            <Image
-                                src="https://media.istockphoto.com/id/1087531642/vector/male-face-silhouette-or-icon-man-avatar-profile-unknown-or-anonymous-person-vector.jpg?s=612x612&w=0&k=20&c=FEppaMMfyIYV2HJ6Ty8tLmPL1GX6Tz9u9Y8SCRrkD-o="
-                                roundedCircle
-                                height="60" 
-                                />
-                        </Link>
-                    { post.title }</Card.Title>        
-                    <Card.Text>{ post.body }</Card.Text>
-                    <Button variant="light" className="">Комментарии</Button>
-                </Card.Body>
-            </Card>
+            <Post
+                key={post.id}
+                id={post.id}
+                title={post.title}
+                body={post.body}
+            ></Post>
           ))}
         </>
     )
