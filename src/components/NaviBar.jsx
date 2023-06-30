@@ -6,7 +6,6 @@ export default function NaviBar() {
     return(
     <>
         <Navbar collapseOnSelect expand="expand" bg="dark" data-bs-theme="dark" className="mb-3">
-            <Navbar.Brand className="ms-2" as={Link} to="/"> Blog Post</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav" >
                 <Nav className="ms-5">
@@ -24,6 +23,8 @@ export default function NaviBar() {
                     <Navbar.Text>Моисеева Мария </Navbar.Text>
                     <Navbar.Text className="ms-2">mash.moiseeva24@gmail.com</Navbar.Text>
             </Navbar.Collapse> 
+            <Navbar.Brand className="ms-2" as={Link} to="/"> Blog Post</Navbar.Brand>
         </Navbar>
+        
     </>)
 }
