@@ -1,27 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import Post from "./Post";
-import { Form, Button, Stack, InputGroup, Dropdown, DropdownButton } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import { useGetPostsQuery } from "../store/posts.api";
+import Pages from "./Pages";
 
 export default function Posts() {
     const { data, isLoading, error } = useGetPostsQuery();
-    console.log(data);  
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(10);
+
+    const lastPostIndex = currentPage * postsPerPage;
+    const firstPostIndex = lastPostIndex - postsPerPage;
+    const currentPosts = data ? data.slice(firstPostIndex, lastPostIndex): 'error';
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
   
     return(
         <>  
-            <Stack direction="horizontal" gap={3}>
-                <InputGroup className="m-2 w-auto">
-                    <Form.Control aria-describedby="basic-addon1"  placeholder="Type to search..." /> 
-                    <Button variant="light"> X </Button>  
-                    <Button variant="info">Search</Button>                
-                </InputGroup>
-                    <DropdownButton variant="info" title="Сортировка">
-                        <Dropdown.Item eventKey="1">По возрастанию</Dropdown.Item>
-                        <Dropdown.Item eventKey="2">По убыванию</Dropdown.Item>
-                    </DropdownButton>
-            </Stack>
-          { isLoading ? 'Loading' :
-            data.map(post => (
+          { isLoading ? <Spinner> </Spinner>:
+          currentPosts.map(post => (
             <Post
                 key={post.id}
                 id={post.id}
@@ -29,6 +25,14 @@ export default function Posts() {
                 body={post.body}
             ></Post>
           ))}
+               {data ? 
+                        <Pages 
+                            postsPerPage={postsPerPage} 
+                            totalPosts={data.length}
+                            paginate={paginate}
+                        /> : <></>
+               }
+
         </>
     )
 }
