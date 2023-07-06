@@ -7,10 +7,19 @@ export const postsApi = createApi({
         getPosts: build.query({
             query: () => 'posts/'
         }),
+
         getComments: build.query({
             query: (id) => `posts/${id}/comments`
         }),
+
+        getUserPosts: build.query({
+            query: (id) => `posts?userId=${id}`
+        }),
+
+        getUserData: build.query({
+            query: (id) => `users/${id}`
+        })
     })
 });
 
-export const { useGetPostsQuery, useGetCommentsQuery } = postsApi
+export const { useGetPostsQuery, useGetCommentsQuery, useGetUserPostsQuery, useGetUserDataQuery } = postsApi
