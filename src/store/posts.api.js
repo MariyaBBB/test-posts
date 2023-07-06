@@ -6,8 +6,11 @@ export const postsApi = createApi({
     endpoints: (build) => ({
         getPosts: build.query({
             query: () => 'posts/'
-        })
+        }),
+        getComments: build.query({
+            query: (id) => `posts/${id}/comments`
+        }),
     })
 });
 
-export const {useGetPostsQuery} = postsApi
+export const { useGetPostsQuery, useGetCommentsQuery } = postsApi

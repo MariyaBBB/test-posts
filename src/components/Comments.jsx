@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Card, Image } from "react-bootstrap";
+import React from "react";
+import { Card, Image, Spinner } from "react-bootstrap";
+import { useGetCommentsQuery } from "../store/posts.api";
 
 export default function Comments({postId, display}) {
-    const src = `https://jsonplaceholder.typicode.com/posts/${postId}/comments`;
-    const [comments, setComments] = useState([]);
-    useEffect(() => {
-        axios
-            .get(src)
-            .then(data => setComments(data.data))
-    }, [])
-
-    
-
+    const { data, isLoading, error } = useGetCommentsQuery(postId);
+    console.log(data)
     return(
         <>  
-            {comments.map(c => (
+            { isLoading ? <Spinner></Spinner>:
+                data.map(c => (
                 <Card.Header key={c.id} className={display ? 'd-block mt-1 border-0 mb-3' : 'd-none'}  >
                     <Card.Title className="h6"> <Image 
                         src="https://zazakon.ru/sites/default/files/default_images/avatar.png"
