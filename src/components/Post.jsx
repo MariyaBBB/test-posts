@@ -3,15 +3,18 @@ import { Card, Image } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Comments from "./Comments";
+import UserInfo from "./UserInfo";
+import { Users } from "../pages/Users";
 
-export default function Post ({id, title, body}) {
+export default function Post ({id, title, body, userId}) {
     const [display, setDisplay] = useState(false);
     return(
         <Card border="dark" className="mb-2 me-2 ms-2">
                 <Card.Body className="">
                     <Card.Title>
                         <Link
-                        to="/about">
+                            to={`/users/${userId}`}
+                            >
                             <Image
                                 src="https://media.istockphoto.com/id/1087531642/vector/male-face-silhouette-or-icon-man-avatar-profile-unknown-or-anonymous-person-vector.jpg?s=612x612&w=0&k=20&c=FEppaMMfyIYV2HJ6Ty8tLmPL1GX6Tz9u9Y8SCRrkD-o="
                                 roundedCircle

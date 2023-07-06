@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
+import UserInfo from "../components/UserInfo";
+import { useParams } from "react-router-dom";
 
 export const Users = () => {
+    let { id } = useParams(); 
     return (
-        <h1>Page Users</h1>
+        <UserInfo userId={id} />
     )
 }

@@ -15,7 +15,7 @@ function App() {
       <NaviBar></NaviBar>
         <Routes>
           <Route path='/' Component={Home} />
-          <Route path='/users' Component={Users} />
+          <Route path='/users/:id' Component={Users} />
           <Route path='/about' Component={About} />
         </Routes>
       
