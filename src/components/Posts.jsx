@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "../store/slice";
 
 export default function Posts() {
-    const posts = useSelector((state) => state.posts);
+    const {posts, filteredPosts} = useSelector((state) => state.posts);
     const { data: fetchedData, isLoading } = useGetPostsQuery();
     const dispatch = useDispatch();
    
@@ -21,13 +21,13 @@ export default function Posts() {
     const [postsPerPage] = useState(10);
     const lastPostIndex = currentPage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
-    const currentPosts = posts ? posts.slice(firstPostIndex, lastPostIndex): 'error';
+    const currentPosts = filteredPosts ? filteredPosts.slice(firstPostIndex, lastPostIndex): 'error';
     const paginate = (pageNumber) => setCurrentPage(pageNumber)
   
     return(
         <>  
           { isLoading ? <Spinner> </Spinner>:
-          currentPosts.map(post => (
+            currentPosts.map(post => (
             <Post
                 key={post.id}
                 id={post.id}
@@ -36,10 +36,10 @@ export default function Posts() {
                 userId={post.userId}
             ></Post>
           ))}
-               {posts ? 
+               {filteredPosts ? 
                         <Pages 
                             postsPerPage={postsPerPage} 
-                            totalPosts={posts.length}
+                            totalPosts={filteredPosts.length}
                             paginate={paginate}
                         /> : <></>
                }
