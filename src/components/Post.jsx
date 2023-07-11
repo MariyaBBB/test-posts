@@ -3,8 +3,6 @@ import { Card, Image } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Comments from "./Comments";
-import UserInfo from "./UserInfo";
-import { Users } from "../pages/Users";
 
 export default function Post ({id, title, body, userId}) {
     const [display, setDisplay] = useState(false);

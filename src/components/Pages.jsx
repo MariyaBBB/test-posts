@@ -10,7 +10,7 @@ export default function Pages({ postsPerPage, totalPosts, paginate }) {
     }
     return(
         <div className="align-items-center">
-            <Pagination>
+            <Pagination className="">
                 {pagesNumber.map((page, i) => (
                
                     <Pagination.Item className="ms-2" key={i} onClick={() => {paginate(page); setActive(page)}} active={page === active}>

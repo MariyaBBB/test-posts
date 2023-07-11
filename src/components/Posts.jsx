@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "../store/slice";
 
 export default function Posts() {
-    const {posts, filteredPosts} = useSelector((state) => state.posts);
+    const { filteredPosts } = useSelector((state) => state.posts);
     const { data: fetchedData, isLoading } = useGetPostsQuery();
     const dispatch = useDispatch();
    

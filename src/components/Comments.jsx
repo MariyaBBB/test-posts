@@ -3,8 +3,7 @@ import { Card, Image, Spinner } from "react-bootstrap";
 import { useGetCommentsQuery } from "../store/posts.api";
 
 export default function Comments({postId, display}) {
-    const { data, isLoading, error } = useGetCommentsQuery(postId);
-    console.log(data)
+    const { data, isLoading } = useGetCommentsQuery(postId);
     return(
         <>  
             { isLoading ? <Spinner></Spinner>:
