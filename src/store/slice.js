@@ -14,13 +14,20 @@ export const sortedSlice = createSlice({
 
         sortPosts: (state, action) => {
             const { field, order } = action.payload;
-            state.posts.sort((a, b) => {
+            state.filteredPosts.sort((a, b) => {
               if (order === 'asc') {
                 return a[field] > b[field] ? 1 : -1;
               } else {
                 return a[field] > b[field] ? -1 : 1;
               }
             })
+            state.posts.sort((a, b) => {
+                if (order === 'asc') {
+                  return a[field] > b[field] ? 1 : -1;
+                } else {
+                  return a[field] > b[field] ? -1 : 1;
+                }
+              })
         },
 
         filterPosts: (state, action) => {
